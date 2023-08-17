@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Details</title>
+</head>
+<body>
+<h1>Welcome!! Please submit your details.</h1>
+<label for="firstName">First Name:</label>
+<input type="text" id="firstName" placeholder="Enter your first name"><br>
+
+<label for="lastName">Last Name:</label>
+<input type="text" id="lastName" placeholder="Enter your last name"><br>
+
+<label for="mobileNumber">Mobile:</label>
+<input type="number" id="mobileNumber" placeholder="Enter your mobil number"><br>
+
+<label for="emailAddress">Email:</label>
+<input type="email" id="emailAddress" placeholder="Enter your email"><br>
+
+<button id="sendButton">Submit</button>
+
+<script>
+        document.getElementById("sendButton").addEventListener("click", function() {
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const mobileNumber = document.getElementById("mobileNumber").value;
+            const emailAddress = document.getElementById("emailAddress").value;
+
+            const data = {
+                firstName: firstName,
+                lastName: lastName,
+                mobileNumber: mobileNumber,
+                emailAddress: emailAddress
+            };
+
+            const url = "https://localhost:8080/user-info/addUserInfo"; // Replace with your server's API endpoint
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(responseData => {
+                console.log("Response from server:", responseData);
+                // You can perform further actions based on the server's response
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>
